@@ -59,9 +59,9 @@ export class InboxCalendarComponent implements OnInit {
    
     //dataSource : this.inboxService.getAllAppointmentData(),
     fields: {
-    subject: { name: 'Title', validation: { required: true,minLength: 5 }}, 
+    subject: { name: 'title', validation: { required: true,minLength: 5 }}, 
       description: {
-          name: 'Description',   validation: { required: true, minLength: 5, maxLength: 500}
+          name: 'description',   validation: { required: true, minLength: 5, maxLength: 500}
       },
       startTime: { name: 'startTime', validation: { required: true } },
       endTime: { name: 'endTime', validation: { required: true } }

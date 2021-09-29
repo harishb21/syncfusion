@@ -11,46 +11,46 @@ export class InboxService{
     }
     listOfInboxData: InboxData[] = [
         {
-            Id: 1,
-            Title: 'Surgery - Andrew5',
+            id: 1,
+            title: 'Surgery - Andrew5',
             startTime:  'Tue Oct 26 2021 12:30:00 GMT+0530 (India Standard Time)',
             endTime:  'Tue Oct 26 2021 13:00:00 GMT+0530 (India Standard Time)',
-            Description: 'Surgery - Andrew description',
-            PhysicianId:223,
-            PatiendId:36
+            description: 'Surgery - Andrew description',
+            physicianId:223,
+            patiendId:36
             
         }, {
-            Id: 2,
-            Title: 'Consulting - John4',
+            id: 2,
+            title: 'Consulting - John4',
             startTime: 'Tue Oct 26 2021 14:30:00 GMT+0530 (India Standard Time)',
             endTime: 'Tue Oct 26 2021 15:00:00 GMT+0530 (India Standard Time)',
-            Description: 'Consulting - John description',
-            PhysicianId:224,
-            PatiendId:37
+            description: 'Consulting - John description',
+            physicianId:224,
+            patiendId:37
         }, {
-            Id: 3,
-            Title: 'Therapy - Robert3',
+            id: 3,
+            title: 'Therapy - Robert3',
             startTime: 'Mon Oct 25 2021 15:30:00 GMT+0530 (India Standard Time)',
             endTime: 'Mon Oct 25 2021 16:30:00 GMT+0530 (India Standard Time)',
-            Description: 'Therapy - Robert description',
-            PhysicianId:228,
-            PatiendId:39
+            description: 'Therapy - Robert description',
+            physicianId:228,
+            patiendId:39
         }, {
-            Id: 4,
-            Title: 'Observation - Steven2',
+            id: 4,
+            title: 'Observation - Steven2',
             startTime: 'Mon Oct 25 2021 12:30:00 GMT+0530 (India Standard Time)',
             endTime: 'Mon Oct 25 2021 13:00:00 GMT+0530 (India Standard Time)',
-            Description: 'Observation - Steven description',
-            PhysicianId:229,
-            PatiendId:31
+            description: 'Observation - Steven description',
+            physicianId:229,
+            patiendId:31
         }, {
-            Id: 5,
-            Title: 'Extraction - Nancy11',
+            id: 5,
+            title: 'Extraction - Nancy11',
             startTime: 'Mon Oct 25 2021 14:00:00 GMT+0530 (India Standard Time)',
             endTime: 'Mon Oct 25 2021 14:30:00 GMT+0530 (India Standard Time)',
-            Description: 'Extraction - Nancy description',
-            PhysicianId:225,
-            PatiendId:32
+            description: 'Extraction - Nancy description',
+            physicianId:225,
+            patiendId:32
         }
     ];
         //mock data method
@@ -68,7 +68,7 @@ export class InboxService{
               let count:number=0;
                 this.listOfInboxData.forEach(element => {
                     count++;
-                    if(element.Id === appointmentNum.Id){
+                    if(element.id === appointmentNum.id){
                        this.listOfInboxData[count-1]=appointmentNum;
                     }
                 });
@@ -83,7 +83,7 @@ export class InboxService{
                 let count:number=0;
                 this.listOfInboxData.forEach(element => {
                     count++;
-                    if(element.Id === appointment.Id){
+                    if(element.id === appointment.id){
                         this.listOfInboxData.splice(count-1, 1);
                     }
                 });

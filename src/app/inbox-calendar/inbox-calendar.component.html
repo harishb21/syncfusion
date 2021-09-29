@@ -45,15 +45,15 @@
                         <tr>
                             <td class="e-textlabel">Title</td>
                             <td colspan="4">
-                                <input id="Title" class="e-field e-input" type="text" value="{{data.Title}}"
-                                    name="Title"  style="width: 100%" />
+                                <input id="title" class="e-field e-input" type="text" value="{{data.title}}"
+                                    name="title"  style="width: 100%" />
                             </td>
                         </tr>
                         <tr>
                             <td class="e-textlabel">Description</td>
                             <td colspan="4">
-                                <textarea id="Description" class="e-field e-input" name="Description" rows="3" cols="50"
-                                    value="{{data.Description}}" 
+                                <textarea id="description" class="e-field e-input" name="description" rows="3" cols="50"
+                                    value="{{data.description}}" 
                                     style="width: 100%; height: 60px !important; resize: vertical"></textarea>
                             </td>
                         </tr>
@@ -68,8 +68,8 @@
                         <tr>
                             <td class="e-textlabel">EndTime</td>
                             <td colspan="4">
-                                <ejs-datetimepicker id="endTime" class="e-field" data-name="endTime" format="M/dd/yy h:mm a"
-                                    [value]='dateParser(data.endTime || data.endTime)'></ejs-datetimepicker>
+                                <ejs-datetimepicker id="endTime" class="e-field" data-name="endTime" 
+                                format="M/dd/yy h:mm a" [value]='dateParser(data.endTime || data.endTime)'></ejs-datetimepicker>
                             </td>
                         </tr>
                        

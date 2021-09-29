@@ -1,13 +1,13 @@
 
 export class InboxData {    
     constructor(
-        public Id: number,
-        public Title: String,
+        public id: number,
+        public title: String,
         public startTime: String,
         public endTime: String,
-        public Description: String,
-        public PhysicianId:number,
-        public PatiendId:number
+        public description: String,
+        public physicianId:number,
+        public patiendId:number
     ){}
 }
 export class Staff{
