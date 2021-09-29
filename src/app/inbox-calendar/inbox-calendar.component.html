@@ -23,7 +23,7 @@
                             <td colspan="4">
                                 <ejs-dropdownlist id='Status' name="Status" class="e-field" data-name="Status" placeholder='Choose Name'
                                     [dataSource]='StatusData' [fields]='statusFields' value='{{data.Status}}' 
-                                     (change)="changeWebsite($event)">
+                                     >
                                 </ejs-dropdownlist> 
                             </td>
                            
@@ -60,16 +60,16 @@
                         <tr>
                             <td class="e-textlabel">StartTime</td>
                             <td colspan="4">
-                                <ejs-datetimepicker id="StartTime" class="e-field" data-name="StartTime"
-                                    format="M/dd/yy h:mm a" [value]="dateParser(data.startTime || data.StartTime)">
+                                <ejs-datetimepicker id="startTime" class="e-field" data-name="startTime"
+                                    format="M/dd/yy h:mm a" [value]="dateParser(data.startTime || data.startTime)">
                                 </ejs-datetimepicker>
                             </td>
                         </tr>
                         <tr>
                             <td class="e-textlabel">EndTime</td>
                             <td colspan="4">
-                                <ejs-datetimepicker id="EndTime" class="e-field" data-name="EndTime" format="M/dd/yy h:mm a"
-                                    [value]='dateParser(data.endTime || data.EndTime)'></ejs-datetimepicker>
+                                <ejs-datetimepicker id="endTime" class="e-field" data-name="endTime" format="M/dd/yy h:mm a"
+                                    [value]='dateParser(data.endTime || data.endTime)'></ejs-datetimepicker>
                             </td>
                         </tr>
                        

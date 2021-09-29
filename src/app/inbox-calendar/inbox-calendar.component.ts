@@ -61,7 +61,7 @@ export class InboxCalendarComponent implements OnInit {
     fields: {
     subject: { name: 'Title', validation: { required: true,minLength: 5 }}, 
       description: {
-          name: 'description', validation: { required: true, minLength: 5, maxLength: 500}
+          name: 'Description',   validation: { required: true, minLength: 5, maxLength: 500}
       },
       startTime: { name: 'startTime', validation: { required: true } },
       endTime: { name: 'endTime', validation: { required: true } }
@@ -110,23 +110,23 @@ export class InboxCalendarComponent implements OnInit {
           let data: any;
           if (args.requestType === 'eventCreate') {
               data = <any>args.data[0];
-              console.log("---------new event------data-----"+data);
+              //console.log("---------new event------data-----"+data);
             
               //const objData = this.getAppointmentData(data);
              //this.inboxService.addAppointment(objData);
           } else if (args.requestType === 'eventChange') {
               data = <any>args.data;
              
-             const objData = this.getAppointmentData(data);
-             console.log("objData-------"+objData);
-            this.inboxService.updateAppointment(objData);
+             //const objData = this.getAppointmentData(data);
+            // console.log("objData-------"+objData);
+           // this.inboxService.updateAppointment(objData);
             
           }else if (args.requestType === 'eventRemove') {
             data = <any>args.data;
               
           }
           
-          if (!this.scheduleObj.isSlotAvailable(data.StartTime as Date,data.EndTime as Date)) {
+          if (!this.scheduleObj.isSlotAvailable(data.startTime as Date,data.endTime as Date)) {
               args.cancel = true;
           }
       }
@@ -134,7 +134,7 @@ export class InboxCalendarComponent implements OnInit {
   }
 
   public onPopupOpen(args: PopupOpenEventArgs): void {
-    console.log(args);
+   // console.log(args);
     
     // if (args.type === "Editor") {
     //   const formElement: HTMLElement = args.element.querySelector(
@@ -181,6 +181,6 @@ export class InboxCalendarComponent implements OnInit {
   changeWebsite(e:any) {
    // console.log(e.value);
    console.log(e.itemData.Id);
-   this.physicianValue=e.itemData.Id;
+  // this.physicianValue=e.itemData.Id;
   }
 }
