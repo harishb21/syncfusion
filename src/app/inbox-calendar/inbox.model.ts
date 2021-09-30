@@ -7,16 +7,11 @@ export class InboxData {
         public endTime: String,
         public description: String,
         public physicianId:number,
-        public patiendId:number
+        public patientId:number,
+        public reason:String
     ){}
 }
-export class Staff{
-    constructor(
-        public id:number,
-        public firstName:String,
-        public lastName:string
-    ){}
-}
+
 //==========================================================================================
 export class Appointment {    
     constructor(

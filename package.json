@@ -75,6 +75,7 @@
     "@syncfusion/ej2-splitbuttons": "19.2.62",
     "@syncfusion/ej2-svg-base": "19.2.60",
     "@syncfusion/ej2-treemap": "19.2.60",
+    "fuse.js": "^6.4.6",
     "rxjs": "~6.6.0",
     "rxjs-compat": "6.6.7",
     "tslib": "^2.3.0",
