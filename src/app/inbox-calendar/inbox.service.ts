@@ -72,7 +72,8 @@ export class InboxService implements OnInit {
   listOfInboxData: InboxData[] = [];
 
   getAllAppointmentData(): Observable<InboxData[]> {
-    return this.http.get<InboxData[]>(`${this.HOST_URL}/appointments`);
+    return this.http.get<InboxData[]>(`${this.HOST_URL}/appointments`)
+    
   }
 
   getAllStaffData(): Observable<Staff[]> {

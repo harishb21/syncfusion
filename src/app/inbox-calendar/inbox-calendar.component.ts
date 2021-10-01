@@ -65,7 +65,7 @@ export class InboxCalendarComponent implements OnInit {
     this.inboxService.loadPatientNameData();
     
   }
-
+  ngOnInit(): void {}
   @ViewChild('scheduleObj')
   public scheduleObj: ScheduleComponent;
   public selectedDate: Date = new Date();
@@ -78,13 +78,15 @@ export class InboxCalendarComponent implements OnInit {
   public startDate: Date;
   public endDate: Date;
   public statusFields: Object = { text: 'staffName', value: 'id' };
-  public fields: Object = { value: 'patientName' };
+  public fields: Object = { value: 'pId' ,text:'patientName'};
   public StatusData: StaffName[] = this.inboxService.staffNameList;
   public booksData:PatientName[] =this.inboxService.patientNameList;
   public watermark: string = 'e.g. Cristiano Ronaldo';
   public value: string = '';
   physicianValue: number;
+  patientFilterValue:number;
   physicianStringVal:string='';
+  PatientNamePopUp:string='';
   selectedPhysician:String='';
   patientname:string ='venkate';
   form: FormGroup = new FormGroup({});
@@ -117,7 +119,7 @@ export class InboxCalendarComponent implements OnInit {
   public dateParser(data: string) {
     return new Date(data);
   }
-  ngOnInit(): void {}
+ 
 
  //Bind the filter event
  public onFiltering: EmitType<FilteringEventArgs> = (e: FilteringEventArgs) => {
@@ -170,15 +172,21 @@ public highlightSearch(listItems: Element[], result: any): void {
         data = <any>args.data[0];
         const objData: InboxData = this.getAppointmentData(data);
         this.inboxService.addAppointment(objData);
+       // this.inboxService.getAllAppointmentData();
+       // this.loadUser();
       } else if (args.requestType === 'eventChange') {
         data = <any>args.data;
         const objData :InboxData= this.getAppointmentData(data);
         this.inboxService.updateAppointment(objData);
+        //this.inboxService.getAllAppointmentData();
+       // this.loadUser();
       } else if (args.requestType === 'eventRemove') {
         data = <any>args.data[0];
        console.log(data);
         if(data.id != undefined && data.id){
         this.inboxService.deleteAppointment(data.id);
+        //this.inboxService.getAllAppointmentData();
+        //this.loadUser();
         }
       }
 
@@ -195,13 +203,15 @@ public highlightSearch(listItems: Element[], result: any): void {
     let PhysicianId: number = this.physicianValue;
     let EndTime: String = data.endTime;
     let StartTime: String = data.startTime;
+    let patientId:number = this.patientFilterValue;
     let status: string = data.Status;
     console.log("appointmentId-------"+appointmentId);
     console.log("title-------"+title);
     console.log("Description-------"+Description);
     console.log("PhysicianId-------"+PhysicianId);
     console.log("EndTime-------"+EndTime);
-    console.log("StartTime-------"+StartTime);//const obj = new InboxData(appointmentId,title,StartTime,EndTime,Description,PhysicianId,6);
+    console.log("StartTime-------"+StartTime);
+    console.log("patientId-------"+patientId);
     const obj = {
       id: appointmentId,
       title: title,
@@ -209,13 +219,13 @@ public highlightSearch(listItems: Element[], result: any): void {
       endTime: EndTime,
       description: Description,
       physicianId: PhysicianId,
-      patientId: 2,
+      patientId: patientId,
       reason: 'no reason',
     };   
     return obj;
   }
 
-  changeWebsite(event: any) {
+  paientChangeEvent(event: any) {
    
     //console.log(event.target.;
     if(event.value != null && event.value != undefined){
@@ -227,7 +237,11 @@ public highlightSearch(listItems: Element[], result: any): void {
   }
 
   filteredval(event: any){
-    console.log("filteredval---"+event.value)
+    
+    if(event !=null && event != undefined && event.value != null){
+      console.log("filteredval---"+event.value);
+      this.patientFilterValue= event.value;
+    }
   }
    public startDateParser(data: string) {
     if (isNullOrUndefined(this.startDate) && !isNullOrUndefined(data)) {
@@ -255,17 +269,20 @@ public highlightSearch(listItems: Element[], result: any): void {
     }
   }
   public onPopupOpen(args: PopupOpenEventArgs): void {
-
+    console.log(args);
      if((args.data.id !=null && args.data.physicianId != null ||
       args.data.id !=undefined && args.data.physicianId != undefined) &&
+      //args.data.PatientName != undefined &&
       args.data.id  && args.data.physicianId)
       {
-      console.log(args.data.id);
-      console.log(args.data.physicianId);
+     // console.log(args.data.id);
+     // console.log(args.data.physicianId);
       this.value=args.data.physicianId;
       console.log('value--'+this.value);
       this.physicianStringVal = args.data.physicianId;
       this.physicianValue = args.data.physicianId;
+      console.log('PatientName--'+args.data.PatientName);
+      this.PatientNamePopUp = args.data.patientId;
       //this.selectedPhysician = physicianname[0].staffName
      }
     // if (args.type === "Editor") {
@@ -278,26 +295,29 @@ public highlightSearch(listItems: Element[], result: any): void {
     //     required: [true, "This field is required."]
     //   });
     // }
-    console.log('on open');
+   // console.log('on open');
     //console.log( this.inboxService.getAllAppointmentData());
   }
   onPopupClose(args: PopupCloseEventArgs) : void {
-   console.log("close--");
+   //console.log("close--");
    this.physicianStringVal='';
     this.value='';
     this.startDate = null;
     this.endDate = null;
+    this.PatientNamePopUp='';
   }
   public onEventRendered(args: EventRenderedArgs): void {
     
   }
 }
-//  console.log("appointmentId-------"+appointmentId);
-//  console.log("title-------"+title);
-//  console.log("Description-------"+Description);
-//  console.log("PhysicianId-------"+PhysicianId);
-//  console.log("EndTime-------"+EndTime);
-//  console.log("StartTime-------"+StartTime);
+    // console.log("appointmentId-------"+appointmentId);
+    // console.log("title-------"+title);
+    // console.log("Description-------"+Description);
+    // console.log("PhysicianId-------"+PhysicianId);
+    // console.log("EndTime-------"+EndTime);
+    // console.log("StartTime-------"+StartTime);
+    //const obj = new InboxData(appointmentId,title,StartTime,EndTime,Description,PhysicianId,6);
+    
 
 //dataSource: <InboxData[]>extend([], this.inboxList1, null, true) ,
 //  private dataManger: DataManager = new DataManager({
