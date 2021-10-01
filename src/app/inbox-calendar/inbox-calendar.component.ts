@@ -8,9 +8,10 @@ import { L10n } from '@syncfusion/ej2-base';
 import { TextBoxComponent } from '@syncfusion/ej2-angular-inputs';
 import { ButtonComponent } from '@syncfusion/ej2-angular-buttons';
 import { DropDownListComponent } from '@syncfusion/ej2-angular-dropdowns';
-import * as Fuse from 'fuse.js';
+import Fuse from 'fuse.js';
 import { EmitType } from '@syncfusion/ej2-base';
 import { FilteringEventArgs } from '@syncfusion/ej2-dropdowns';
+//import Fuse from 'fuse.js/dist/fuse.min.js';
 import {
   PopupOpenEventArgs,
   EventRenderedArgs,
@@ -62,6 +63,7 @@ export class InboxCalendarComponent implements OnInit {
     this.loadUser();
     this.inboxService.loadStaffData();
     this.inboxService.loadPatientNameData();
+    
   }
 
   @ViewChild('scheduleObj')
@@ -79,7 +81,7 @@ export class InboxCalendarComponent implements OnInit {
   public fields: Object = { value: 'patientName' };
   public StatusData: StaffName[] = this.inboxService.staffNameList;
   public booksData:PatientName[] =this.inboxService.patientNameList;
-  public watermark: string = 'e.g. Node.js Succinctly';
+  public watermark: string = 'e.g. Cristiano Ronaldo';
   public value: string = '';
   physicianValue: number;
   physicianStringVal:string='';
@@ -118,7 +120,43 @@ export class InboxCalendarComponent implements OnInit {
   ngOnInit(): void {}
 
  //Bind the filter event
- 
+ public onFiltering: EmitType<FilteringEventArgs> = (e: FilteringEventArgs) => {
+  let options: Object = {
+      keys: ['patientName'],
+      includeMatches: true,
+      findAllMatches: true
+  };
+  // create object from Fuse constructor
+  let fuse: Fuse<any> = new Fuse(this.booksData, options);
+  // store the search result data based on typed characters
+  let result: any = fuse.search(e.text);
+  let data: { [key: string]: Object; }[] = [];
+  for (let i: number = 0; i < result.length; i++) {
+      data.push(result[i].item as any);
+  }
+  // pass the filter data source to updateData method.
+  e.updateData(data, null);
+  let popupElement: HTMLElement = document.getElementById('books_popup');
+  if (popupElement)
+  {
+      let lists: Element[] = <NodeListOf<Element> & Element[]>popupElement.querySelectorAll('.e-list-item');
+      // For highlight the typed characters, pass the result data and list items to highlightSearch method.
+      this.highlightSearch(lists, result);
+  }
+}
+public highlightSearch(listItems: Element[], result: any): void {
+  if (result.length > 0) {
+      for (let i: number = 0; i < listItems.length; i++) {
+          let innerHTML: string = listItems[i].innerHTML;
+          for (let j: number = result[i].matches[0].indices.length - 1; j >= 0; j--) {
+              let indexes: number[] = <number[]>result[i].matches[0].indices[j];
+              innerHTML = innerHTML.substring(0, indexes[0]) + '<span class="e-highlight">' +
+                  innerHTML.substring(indexes[0], (indexes[1] + 1)) + '</span>' + innerHTML.substring(indexes[1] + 1);
+              listItems[i].innerHTML = innerHTML;
+          }
+      }
+  }
+}
   public onActionBegin(args: { [key: string]: Object }): void {
     console.log('action---' + args);
 
@@ -186,6 +224,10 @@ export class InboxCalendarComponent implements OnInit {
       console.log(event.value);
 
     }
+  }
+
+  filteredval(event: any){
+    console.log("filteredval---"+event.value)
   }
    public startDateParser(data: string) {
     if (isNullOrUndefined(this.startDate) && !isNullOrUndefined(data)) {

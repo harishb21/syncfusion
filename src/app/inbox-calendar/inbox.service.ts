@@ -3,12 +3,14 @@ import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { PatientName, Staff, StaffName } from './staff.model';
+import { Patient } from './patient.model';
 
 @Injectable({ providedIn: 'root' })
 export class InboxService implements OnInit {
   constructor(private http: HttpClient) {
     //this.getAllAppointmentData();
     this.getAllStaffData();
+    this.getAllPaientData();
   }
   ngOnInit(): void {
     this.loadStaffData();
@@ -77,8 +79,8 @@ export class InboxService implements OnInit {
     return this.http.get<Staff[]>(`${this.HOST_URL}/appointments/employees`);
   }
 
-  getAllPaientData(): Observable<Staff[]> {
-    return this.http.get<Staff[]>(`${this.HOST_URL}/appointments/patients`);
+  getAllPaientData(): Observable<Patient[]> {
+    return this.http.get<Patient[]>(`${this.HOST_URL}/appointments/patients`);
   } 
   loadStaffData() {
     this.getAllStaffData().subscribe((res) => {
@@ -98,7 +100,8 @@ export class InboxService implements OnInit {
 loadPatientNameData() {
   this.getAllPaientData().subscribe((res) => {
     res.forEach((data) => {
-        let obj = {
+     // console.log(data.firstName);  
+      let obj = {
           patientName: data.firstName + ' ' + data.lastName,
           pId: data.userId,
         };

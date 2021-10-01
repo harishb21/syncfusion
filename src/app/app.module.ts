@@ -31,6 +31,9 @@ import {MatSelectModule} from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import { AutoCompleteModule } from '@syncfusion/ej2-angular-dropdowns';
+import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
+import { CheckBoxModule  } from '@syncfusion/ej2-angular-buttons';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +46,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
          ToolbarAllModule, DropDownListAllModule, ContextMenuAllModule,
           MaskedTextBoxModule, UploaderAllModule, MultiSelectAllModule,
     TreeViewModule, ButtonAllModule, DropDownButtonAllModule, SwitchAllModule,ReactiveFormsModule,
-    FormsModule,MatChipsModule,
+    FormsModule,MatChipsModule,CheckBoxModule,
     HttpClientModule,
     MatToolbarModule,
     MatSidenavModule,
@@ -58,7 +61,10 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     MatInputModule,
     MatSelectModule,
     MatCardModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    AutoCompleteModule,
+    DropDownListModule
+    
    
   ],
   providers: [],
