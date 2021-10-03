@@ -75,6 +75,8 @@ export class InboxCalendarComponent implements OnInit {
   public enddate: Object = new Date(2021, 12, 22, 20);
   public startHour: string = '09:00';
   public endHour: string = '20:00';
+  public minDate: Object = new Date('10/03/2021');
+  public maxDate: Object = new Date('10/28/2021');
   public startDate: Date;
   public endDate: Date;
   public statusFields: Object = { text: 'staffName', value: 'id' };
@@ -261,15 +263,23 @@ public highlightSearch(listItems: Element[], result: any): void {
   }
   public onDateChange(args: ChangeEventArgs): void {
     if (!isNullOrUndefined(args.event)) {
-      if (args.element.id === "StartTime") {
+      if (args.element.id === "startTime") {
         this.startDate = args.value;
-      } else if (args.element.id === "EndTime") {
+      } else if (args.element.id === "endTime") {
         this.endDate = args.value;
       }
     }
   }
+  isValidAction(date:any) {
+    return !(date.getTime() > new Date().getTime());
+  }
   public onPopupOpen(args: PopupOpenEventArgs): void {
     console.log(args);
+
+    if (["QuickInfo", "Editor"].indexOf(args.type) > -1) {
+      args.cancel = this.isValidAction(args.data.startTime);
+    }
+
      if((args.data.id !=null && args.data.physicianId != null ||
       args.data.id !=undefined && args.data.physicianId != undefined) &&
       //args.data.PatientName != undefined &&
@@ -308,6 +318,12 @@ public highlightSearch(listItems: Element[], result: any): void {
   }
   public onEventRendered(args: EventRenderedArgs): void {
     
+  }
+  onRenderCell(args:any): void {
+    if (args.elementType === "workCells" && args.date.getTime() <= new Date().getTime() && !args.element.classList.contains("e-disable-dates")) {
+      args.element.classList.add("e-disable-dates");
+      args.element.classList.add("e-disable-cell");
+    }
   }
 }
     // console.log("appointmentId-------"+appointmentId);

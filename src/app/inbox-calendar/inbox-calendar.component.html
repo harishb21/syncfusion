@@ -5,6 +5,7 @@
     (actionBegin)="onActionBegin($event)"
     (popupOpen)="onPopupOpen($event)"
     (popupClose) ='onPopupClose($event)'
+    (renderCell)="onRenderCell($event)"
     [workHours]="workHours" 
     [startHour]="startHour" 
     [endHour]="endHour"
@@ -67,7 +68,8 @@
                             <td class="e-textlabel">StartTime</td>
                             <td colspan="4">
                                 <ejs-datetimepicker id="startTime" class="e-field" data-name="startTime" format="M/dd/yy h:mm a"
-                                (change)="onDateChange($event)" [value]="startDateParser(data.startTime || data.StartTime)">
+                                (change)="onDateChange($event)" [value]="startDateParser(data.startTime || data.StartTime)"
+                                [min]='minDate' [max]='maxDate'>
                               </ejs-datetimepicker>
                             </td>
                         </tr>
@@ -75,7 +77,8 @@
                             <td class="e-textlabel">EndTime</td>
                             <td colspan="4">
                                 <ejs-datetimepicker id="endTime" class="e-field" data-name="endTime" format="M/dd/yy h:mm a"
-                                    (change)="onDateChange($event)" [value]="endDateParser(data.endTime || data.EndTime)">
+                                    (change)="onDateChange($event)" [value]="endDateParser(data.endTime || data.EndTime)"
+                                    [min]='minDate' [max]='maxDate' >
                                 </ejs-datetimepicker>
                             </td>
                         </tr>
